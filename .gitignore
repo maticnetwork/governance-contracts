@@ -1,0 +1,13 @@
+node_modules
+build
+
+.DS_Store
+*.env
+
+node_modules
+
+#Hardhat files
+cache
+artifacts
+
+yarn-error.log
