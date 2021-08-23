@@ -11,6 +11,7 @@
     "compile": "npx hardhat compile",
     "accounts": "npx hardhat accounts",
     "deploy:timelock:fork": "npx hardhat run scripts/deploy-timelock.ts",
+    "deploy:timelock:mainnet": "npx hardhat run scripts/deploy-timelock.ts --network mainnet",
     "test:ci": "npx hardhat test"
   },
   "dependencies": {
