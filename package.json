@@ -4,13 +4,12 @@
   "description": "Polygon POS chain governance contracts",
   "main": "index.js",
   "author": "Polygon network",
-  "license": "MIT",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "preinstall": "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash",
     "make": "yarn",
     "compile": "npx hardhat compile",
     "accounts": "npx hardhat accounts",
-    "deploy:timelock:fork": "npx hardhat run scripts/deploy-timelock.ts",
     "deploy:timelock:mainnet": "npx hardhat run scripts/deploy-timelock.ts --network mainnet",
     "test:ci": "npx hardhat test"
   },
