@@ -4,7 +4,7 @@
   "description": "Polygon POS chain governance contracts",
   "main": "index.js",
   "author": "Polygon network",
-  "license": "MIT",
+  "license": "GNU General Public License v3.0",
   "scripts": {
     "preinstall": "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash",
     "make": "yarn",
