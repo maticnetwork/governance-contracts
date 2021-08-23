@@ -1,21 +1,33 @@
 import '@nomiclabs/hardhat-waffle'
-import { task, HardhatUserConfig } from 'hardhat/config'
+import 'hardhat-spdx-license-identifier'
+import '@typechain/hardhat'
 
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
-task('accounts', 'Prints the list of accounts', async(args, hre) => {
-  const accounts = await hre.ethers.getSigners()
-
-  for (const account of accounts) {
-    console.log(account.address)
-  }
-})
+const { MNEMONIC, API_KEY } = process.env
 
 const config = {
+  defaultNetwork: 'hardhat',
+  mainnet: {
+    chainId: 1,
+    gas: 'auto',
+    accounts: { mnemonic: MNEMONIC }
+  },
+  hardhat: {
+    chainId: 1,
+    gas: 8e6,
+    forking: {
+      url: `https://mainnet.infura.io/v3/${API_KEY}`
+    },
+    accounts: { mnemonic: MNEMONIC }
+  },
   solidity: '0.7.6',
+  spdxLicenseIdentifier: {
+    overwrite: true,
+    runOnCompile: true
+  },
   typechain: {
-    outDir: 'types',
-    target: 'ethers-v5'
+    outDir: 'src/types',
+    target: 'ethers-v5',
+    alwaysGenerateOverloads: false
   }
 }
 
