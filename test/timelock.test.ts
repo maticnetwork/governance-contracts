@@ -12,7 +12,7 @@ describe('Timelock', function() {
   let multisig: Signer
   let timelock: Timelock
 
-  function deploy() {
+  function deploy({ renounceAdmin = false } = {}) {
     before(async function() {
       [admin, fakePropose, multisig] = await ethers.getSigners()
 
@@ -23,6 +23,10 @@ describe('Timelock', function() {
       const multisigAddr = await multisig.getAddress()
       timelock = await artifact.deploy(86400 * 2, [multisigAddr], [multisigAddr])
       await timelock.deployed()
+
+      if (renounceAdmin) {
+        await timelock.connect(admin).renounceRole(await timelock.TIMELOCK_ADMIN_ROLE(), await admin.getAddress())
+      }
     })
   }
 
@@ -39,7 +43,7 @@ describe('Timelock', function() {
   })
 
   describe('when tx is being executed too early', function() {
-    deploy()
+    deploy({ renounceAdmin: true })
 
     it('should schedule tx', async function() {
       await timelock.connect(multisig).schedule(
@@ -66,7 +70,7 @@ describe('Timelock', function() {
   })
 
   describe('when tx is being executed after a delay', function() {
-    deploy()
+    deploy({ renounceAdmin: true })
 
     it('should schedule tx', async function() {
       await timelock.connect(multisig).schedule(
