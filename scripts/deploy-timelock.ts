@@ -1,13 +1,16 @@
 import { deployContract } from './deployer'
 import { ethers } from 'hardhat'
+import { TIMELOCK_DELAY, MULTISIG } from '../src/contants'
+import { Timelock } from '../src/types'
 
 async function main() {
   const accounts = await ethers.getSigners()
-
-  console.log('Accounts:', accounts.map(a => a.address))
-
   // We get the contract to deploy
-  await deployContract('Timelock', accounts[0], 43200, [accounts[0].address], [accounts[0].address])
+  const contractInstance = await deployContract('Timelock', accounts[0], TIMELOCK_DELAY, [MULTISIG], [MULTISIG]) as Timelock
+  await contractInstance.connect(accounts[0]).renounceRole(
+    await contractInstance.TIMELOCK_ADMIN_ROLE(),
+    await accounts[0].getAddress()
+  )
 }
 
 // We recommend this pattern to be able to use async/await everywhere
