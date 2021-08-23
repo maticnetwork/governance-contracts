@@ -10,24 +10,18 @@
     "make": "yarn",
     "compile": "npx hardhat compile",
     "accounts": "npx hardhat accounts",
-    "deploy:timelock": "npx hardhat run scripts/deploy-timelock.ts"
+    "deploy:timelock:fork": "npx hardhat run scripts/deploy-timelock.ts",
+    "test:ci": "npx hardhat test"
   },
   "dependencies": {
-    "@typechain/ethers-v5": "^7.0.0",
+    "@nomiclabs/hardhat-ethers": "^2.0.0",
+    "@nomiclabs/hardhat-waffle": "^2.0.0",
+    "@openzeppelin/contracts": "^3.1.0",
+    "@typechain/ethers-v5": "^7.0.1",
+    "@typechain/hardhat": "^2.3.0",
     "@types/chai": "^4.2.18",
     "@types/mocha": "^8.2.2",
     "@types/node": "^15.6.1",
-    "hardhat": "^2.3.0",
-    "hardhat-typechain": "^0.3.5",
-    "source-map-support": "^0.5.19",
-    "ts-generator": "^0.1.1",
-    "ts-node": "^9.0.0",
-    "tsconfig-paths": "^3.9.0",
-    "typechain": "^5.0.0",
-    "typescript": "^4.0.2",
-    "@openzeppelin/contracts": "^3.1.0",
-    "@nomiclabs/hardhat-ethers": "^2.0.0",
-    "@nomiclabs/hardhat-waffle": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "babel-eslint": "^10.1.0",
@@ -42,6 +36,17 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "ethereum-waffle": "^3.0.0",
-    "ethers": "^5.0.0"
+    "ethers": "^5.0.0",
+    "hardhat": "^2.3.0",
+    "hardhat-typechain": "^0.3.5",
+    "source-map-support": "^0.5.19",
+    "ts-generator": "^0.1.1",
+    "ts-node": "^9.0.0",
+    "tsconfig-paths": "^3.9.0",
+    "typechain": "^5.1.2",
+    "typescript": "^4.0.2"
+  },
+  "devDependencies": {
+    "hardhat-spdx-license-identifier": "^2.0.3"
   }
 }

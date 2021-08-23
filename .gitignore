@@ -11,3 +11,5 @@ cache
 artifacts
 
 yarn-error.log
+
+src/types/
