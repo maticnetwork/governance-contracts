@@ -26,7 +26,7 @@ yarn test:ci
 #### Contracts
 
 
-`TimeLock.sol` - This contract is standard OpenZeppelin `TimelockController` contract, which executes each proposal with mentioned delay. For products, we are using 2 days of delay for execution.
+`TimeLock.sol` - This contract is standard OpenZeppelin `TimelockController` contract, which executes each proposal with mentioned delay. For production, 2 days of delay will be used.
 
 
 #### LICENSE
