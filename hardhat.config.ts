@@ -1,8 +1,9 @@
 import '@nomiclabs/hardhat-waffle'
 import 'hardhat-spdx-license-identifier'
-import '@typechain/hardhat'
+import '@nomiclabs/hardhat-etherscan'
+import './src/tasks'
 
-const { MNEMONIC, API_KEY } = process.env
+const { MNEMONIC, API_KEY, ES_KEY } = process.env
 
 const config = {
   defaultNetwork: 'hardhat',
@@ -23,6 +24,11 @@ const config = {
     outDir: 'src/types',
     target: 'ethers-v5',
     alwaysGenerateOverloads: false
+  },
+  etherscan: {
+    // Your API key for Etherscan
+    // Obtain one at https://etherscan.io/
+    apiKey: ES_KEY
   }
 }
 

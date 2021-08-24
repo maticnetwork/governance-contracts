@@ -5,11 +5,13 @@
     "strict": true,
     "esModuleInterop": true,
     "outDir": "dist",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowJs": true
   },
   "include": [
     "./scripts",
-    "./test"
+    "./test",
+    "./src/**/*"
   ],
   "files": [
     "./hardhat.config.ts"
