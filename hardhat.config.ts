@@ -2,10 +2,12 @@ import '@nomiclabs/hardhat-waffle'
 import 'hardhat-spdx-license-identifier'
 import '@nomiclabs/hardhat-etherscan'
 import './src/tasks'
+import '@typechain/hardhat'
+import { HardhatUserConfig } from 'hardhat/config'
 
 const { MNEMONIC, API_KEY, ES_KEY } = process.env
 
-const config = {
+const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
   networks: {
     mainnet: {
@@ -29,6 +31,9 @@ const config = {
     // Your API key for Etherscan
     // Obtain one at https://etherscan.io/
     apiKey: ES_KEY
+  },
+  mocha: {
+    timeout: 99999
   }
 }
 
