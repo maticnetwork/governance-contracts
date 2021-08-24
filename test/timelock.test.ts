@@ -8,13 +8,13 @@ import { increaseTime } from '../src/evm'
 
 describe('Timelock', function() {
   let admin: Signer
-  let fakePropose: Signer
+  let newProposer: Signer
   let multisig: Signer
   let timelock: Timelock
 
   function deploy({ renounceAdmin = false } = {}) {
     before(async function() {
-      [admin, fakePropose, multisig] = await ethers.getSigners()
+      [admin, newProposer, multisig] = await ethers.getSigners()
 
       const artifact = await ethers.getContractFactory('Timelock', {
         signer: admin
@@ -38,7 +38,42 @@ describe('Timelock', function() {
     })
 
     it('reverts when deployer tries to add new proposer', async function() {
-      await expect(timelock.connect(admin).grantRole(await timelock.PROPOSER_ROLE(), await fakePropose.getAddress())).to.be.revertedWith('AccessControl: sender must be an admin to grant')
+      await expect(timelock.connect(admin).grantRole(await timelock.PROPOSER_ROLE(), await newProposer.getAddress())).to.be.revertedWith('AccessControl: sender must be an admin to grant')
+    })
+  })
+
+  describe('when executor and proposer grants a role', function() {
+    deploy()
+
+    let calldata: string
+
+    it('should grant an executor role', async function() {
+      calldata = timelock.interface.encodeFunctionData('grantRole', [await timelock.PROPOSER_ROLE(), await newProposer.getAddress()])
+      await timelock.connect(multisig).schedule(
+        timelock.address,
+        0,
+        calldata,
+        utils.formatBytes32String(''),
+        utils.formatBytes32String('salt'),
+        TIMELOCK_DELAY
+      )
+
+      await increaseTime(TIMELOCK_DELAY + 1)
+
+      await timelock.connect(multisig).execute(
+        timelock.address,
+        0,
+        calldata,
+        utils.formatBytes32String(''),
+        utils.formatBytes32String('salt')
+      )
+    })
+
+    it('new address should have executor role', async function() {
+      // eslint-disable-next-line no-unused-expressions
+      expect(
+        await timelock.hasRole(await timelock.PROPOSER_ROLE(), await newProposer.getAddress())
+      ).to.be.true
     })
   })
 
