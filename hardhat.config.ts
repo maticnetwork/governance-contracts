@@ -5,7 +5,7 @@ import './src/tasks'
 import '@typechain/hardhat'
 import { HardhatUserConfig } from 'hardhat/config'
 
-const { MNEMONIC, API_KEY, ES_KEY } = process.env
+const { MNEMONIC = 'gesture rather obey video awake genuine patient base soon parrot upset lounge', API_KEY = '', ES_KEY } = process.env
 
 const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
