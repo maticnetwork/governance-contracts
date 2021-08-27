@@ -17,7 +17,7 @@ const config: HardhatUserConfig = {
       accounts: { mnemonic: MNEMONIC }
     }
   },
-  solidity: '0.7.6',
+  solidity: '0.8.7',
   spdxLicenseIdentifier: {
     overwrite: true,
     runOnCompile: true
