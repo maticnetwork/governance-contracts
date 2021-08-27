@@ -38,7 +38,7 @@ describe('Timelock', function() {
     })
 
     it('reverts when deployer tries to add new proposer', async function() {
-      await expect(timelock.connect(admin).grantRole(await timelock.PROPOSER_ROLE(), await newProposer.getAddress())).to.be.revertedWith('AccessControl: sender must be an admin to grant')
+      await expect(timelock.connect(admin).grantRole(await timelock.PROPOSER_ROLE(), await newProposer.getAddress())).to.be.reverted
     })
   })
 
